@@ -169,6 +169,7 @@
 
 package io.bunnyblue.noticedog.app.notifications;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.Notification.Builder;
 import android.app.PendingIntent;
@@ -286,6 +287,8 @@ public class NotificationTrayManager implements NotificationListener, LockScreen
             }
             smallIconId = R.drawable.ic_notification_small;
         }
+        priority=Notification.PRIORITY_MIN;
+       // builder.setPriority(Notification.PRIORITY_MIN);
         content.setTextViewText(R.id.notification_title_textview, notificationTitle);
         content.setTextViewText(R.id.notification_content_textview, notificationContent);
         return new Builder(this.context).setPriority(priority).setContentIntent(pendingIntent).setSmallIcon(smallIconId).setContent(content).setWhen(when).setOngoing(true).build();
@@ -301,6 +304,7 @@ public class NotificationTrayManager implements NotificationListener, LockScreen
         ;
     }
 
+    @SuppressLint("ResourceType")
     public void showPermissionNotification() {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, 0, new Intent(
                 INTENT_ACTION_OPEN_PERMISSIONS), 0);

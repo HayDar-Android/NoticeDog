@@ -169,6 +169,7 @@
 
 package io.bunnyblue.noticedog.app.ui.anim;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
@@ -181,6 +182,7 @@ import java.util.List;
 import io.bunnyblue.noticedog.app.R;
 import io.bunnyblue.noticedog.app.core.GuiceModule;
 
+@SuppressLint("AppCompatCustomView")
 public class AnimationPNGSequence extends ImageView {
     public static int NO_LOOP_POINT = -1;
     private AnimationDrawablePNG animationDrawable;
@@ -196,11 +198,12 @@ public class AnimationPNGSequence extends ImageView {
             AnimationDetails details = new AnimationDetails();
             CharSequence s = a.getString(0);
             details.sequenceName = (String) s;
-            details.oneShot = Boolean.valueOf(a.getBoolean(1, details.oneShot.booleanValue()));
-            details.delay = (long) a.getInt(2, (int) details.delay);
-            details.loopCount = a.getInt(5, details.loopCount);
-            details.loopEnd = a.getInt(4, details.loopEnd);
-            details.loopStart = a.getInt(3, details.loopStart);
+
+            details.oneShot = Boolean.valueOf(a.getBoolean( R.styleable.AnimationPNGSequence_one_shot, details.oneShot.booleanValue()));
+            details.delay = (long) a.getInt( R.styleable.AnimationPNGSequence_delay, (int) details.delay);
+            details.loopCount = a.getInt( R.styleable.AnimationPNGSequence_loopCount, details.loopCount);
+            details.loopEnd = a.getInt( R.styleable.AnimationPNGSequence_loopEnd, details.loopEnd);
+            details.loopStart = a.getInt( R.styleable.AnimationPNGSequence_loopStart, details.loopStart);
             if (s != null) {
                 playAnimation(details);
             }

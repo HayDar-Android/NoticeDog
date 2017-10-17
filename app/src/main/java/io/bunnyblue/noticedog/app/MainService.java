@@ -265,7 +265,7 @@ public class MainService extends Service {
         if (this.oobManager.isOOBComplete()) {
             this.notificationTrayManager.showPermissionNotification();
             this.appManager.addListener(new InternalAppListener());
-            startForeground(1, this.notificationTrayManager.getPersistentNotification());
+           //TODO fix startForeground(1, this.notificationTrayManager.getPersistentNotification());
             checkForCrashes();
             return;
         }
