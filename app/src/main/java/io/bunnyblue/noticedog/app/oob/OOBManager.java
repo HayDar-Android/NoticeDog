@@ -256,13 +256,13 @@ public class OOBManager implements NotificationListener {
 
     public void startOOB() {
         Intent intent = new Intent(this.context, OOBSplashScreenActivity.class);
-        intent.addFlags(268435456);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.context.startActivity(intent);
     }
 
     public void startOOBTutorial() {
         Intent intent = new Intent(this.context, OOBTutorialActivity.class);
-        intent.addFlags(268435456);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.context.startActivity(intent);
     }
 

@@ -175,6 +175,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.util.List;
@@ -184,6 +185,7 @@ import io.bunnyblue.noticedog.app.core.GuiceModule;
 
 @SuppressLint("AppCompatCustomView")
 public class AnimationPNGSequence extends ImageView {
+    public static final String TAG="AnimationPNGSequence";
     public static int NO_LOOP_POINT = -1;
     private AnimationDrawablePNG animationDrawable;
 
@@ -196,15 +198,14 @@ public class AnimationPNGSequence extends ImageView {
         if (!isInEditMode()) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AnimationPNGSequence);
             AnimationDetails details = new AnimationDetails();
-            CharSequence s = a.getString(0);
-            details.sequenceName = (String) s;
-
+            details.sequenceName = a.getNonResourceString(R.styleable.AnimationPNGSequence_sequence);
             details.oneShot = Boolean.valueOf(a.getBoolean( R.styleable.AnimationPNGSequence_one_shot, details.oneShot.booleanValue()));
             details.delay = (long) a.getInt( R.styleable.AnimationPNGSequence_delay, (int) details.delay);
             details.loopCount = a.getInt( R.styleable.AnimationPNGSequence_loopCount, details.loopCount);
             details.loopEnd = a.getInt( R.styleable.AnimationPNGSequence_loopEnd, details.loopEnd);
             details.loopStart = a.getInt( R.styleable.AnimationPNGSequence_loopStart, details.loopStart);
-            if (s != null) {
+            Log.d(TAG, "AnimationPNGSequence: "+details.toString());
+            if (details.sequenceName  != null) {
                 playAnimation(details);
             }
             a.recycle();
@@ -278,6 +279,19 @@ public class AnimationPNGSequence extends ImageView {
         public int loopStart = AnimationPNGSequence.NO_LOOP_POINT;
         public Boolean oneShot = Boolean.valueOf(true);
         public String sequenceName;
+
+        @Override
+        public String toString() {
+            return "AnimationDetails{" +
+                    "delay=" + delay +
+                    ", listener=" + listener +
+                    ", loopCount=" + loopCount +
+                    ", loopEnd=" + loopEnd +
+                    ", loopStart=" + loopStart +
+                    ", oneShot=" + oneShot +
+                    ", sequenceName='" + sequenceName + '\'' +
+                    '}';
+        }
     }
 
     private class AnimationDrawablePNG extends AnimationDrawable {

@@ -252,13 +252,16 @@ public class NotificationManager implements AppListener, SettingChangeListener {
         return this.didNotificationServiceStart;
     }
 
+    @Override
     public void onAppLaunched(App app) {
     }
 
+    @Override
     public void onEnabledAppsChanged(List<App> list) {
         this.processors = this.appManager.getNotificationFilters();
     }
 
+    @Override
     public void onAppInstallsChanged() {
     }
 
@@ -311,6 +314,7 @@ public class NotificationManager implements AppListener, SettingChangeListener {
         return false;
     }
 
+    @Override
     public void onSettingChanged(Settings settings, String key) {
         if (key.equals(Settings.KEY_NOTIFICATIONS_IN_DRAWER)) {
             this.keepNotificationsInDrawer = settings.getKeepNotificationsInDrawer();
@@ -370,6 +374,7 @@ public class NotificationManager implements AppListener, SettingChangeListener {
         NotificationManagerReceiver() {
         }
 
+        @Override
         public void onReceive(Context context, Intent intent) {
             String type = intent.getStringExtra("event");
             if (type.equals(NotificationService.EVENT_POSTED)) {

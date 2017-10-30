@@ -541,6 +541,7 @@ public class AppManager implements Settings.SettingChangeListener {
         }
     }
 
+    @Override
     public void onSettingChanged(Settings settings, String key) {
         if (key.equals(Settings.KEY_EXCLUDED_APPS)) {
             loadEnabledApps();
@@ -684,6 +685,7 @@ public class AppManager implements Settings.SettingChangeListener {
         AppInstalledReceiver() {
         }
 
+        @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED")) {
                 AppManager.this.onAppInstalled(intent.getData().getSchemeSpecificPart());
