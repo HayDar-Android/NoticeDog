@@ -238,13 +238,16 @@ public class WelcomeScreenView extends RelativeLayout {
                 timeAnimator.setStartDelay((long) (random.nextInt(500) + 1200));
                 timeAnimator.start();
                 springTranslate.setAnimationListener(new AnimationListener() {
+                    @Override
                     public void onAnimationStart(Animation animation) {
                         bubble.setAlpha(DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
                     }
 
+                    @Override
                     public void onAnimationEnd(Animation animation) {
                     }
 
+                    @Override
                     public void onAnimationRepeat(Animation animation) {
                     }
                 });

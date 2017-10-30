@@ -173,11 +173,13 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -185,12 +187,25 @@ import java.util.Map;
 
 @Singleton
 public class AnimationCache {
+    public static final String TAG="AnimationCache";
     @Inject
     Context context;
     private Map<String, List<byte[]>> cache = new HashMap();
 
     @Inject
     private AnimationCache() {
+    }
+
+    @Inject
+    public void start(){
+        try {
+            for (String s : this.context.getAssets().list("")) {
+                Log.d(TAG, "start: name="+s);
+                loadAnimaiton(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void flushCache() {

@@ -206,15 +206,17 @@ public class OOBSplashScreenActivity extends Activity implements OOBListener {
 
     void startOOBTutorial() {
         Intent intent = new Intent(this, OOBStartupSpinner.class);
-        intent.addFlags(65536);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 
+    @Override
     protected void onDestroy() {
         this.oobManager.removeListener(this);
         super.onDestroy();
     }
 
+    @Override
     public void onOOBComplete() {
         finish();
     }
